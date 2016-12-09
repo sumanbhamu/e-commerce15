@@ -7,24 +7,6 @@
 <html>
 <head>
 <title>Add product</title>
-<!-- <style>
-body {
-	background: url('resources/images/regis.jpg');
-	background-size: cover; /* to stretch image*/
-	background-repeat: no-repeat;
-}
-
-table {
-	margin-left: 750px;
-	font-weight: bold;
-}
-
-tr {
-	font-size: 20px;
-}
-
-</style>
- -->
  <style>
  th{padding: 5px;}
  </style>

@@ -22,7 +22,8 @@ body {
 }
 </style>
 <body>
-	Welcome ${info}
+<p style="color:red; text-align:right">
+          	Welcome 
 
 	<div class="container">
 		<br>

@@ -25,7 +25,9 @@
 				</tr>
 
 			</table>
-<center><a href="viewproducts">Back</a></center>
+			<center>
+				<a href="viewproducts">Back</a>
+			</center>
 		</div>
 	</div>
 </div>

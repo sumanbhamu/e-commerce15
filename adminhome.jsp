@@ -20,16 +20,12 @@
 
 <!-- adding internal style to carousel -->
 <style>
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-	width: 40%;
-	height: 10%;
-	margin: auto;
+.navbar{
+background-color: lightgreen;
 }
-
 body {
 	background-image: url("resources/images/aaa.jpg");
 }
-
 </style>
 <body>
 	<h4>Welcome Admin</h4>

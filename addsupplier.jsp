@@ -46,7 +46,9 @@
 			</div>
 		</form:form>
 	</center>
+	<br><br>
 	<center>
+	<h2>Supplier List</h2>
 		<c:if test="${!empty supplierList}">
 			<table>
 				<tr>
@@ -66,9 +68,9 @@
 
 						<td>${supplier.supplier_address}</td>
 						<td><a
-							href="c:url value='editsupplier${supplier.supplier_id}'/>">Edit</a></td>
+							href="<c:url value='editsupplier${supplier.supplier_id}'/>">Edit</a></td>
 						<td><a
-							href="c:url value='deletesupplier${supplier.supplier_id}'/>">Delete</a></td>
+							href="<c:url value='deletesupplier${supplier.supplier_id}'/>">Delete</a></td>
 					</tr>
 				</c:forEach>
 

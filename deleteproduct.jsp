@@ -1,7 +1,7 @@
 <!-- jstl -->
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <body>
-<h2>Hello admin</h2>
+	<h2>Hello Admin</h2>
 
 	<form:form method="POST" action="addprod" commandName="product">
 		<table>
@@ -28,12 +28,11 @@
 				<td><form:input type="file" path="img" /></td>
 			</tr>
 
-
-
-
 			<tr>
-				<td colspan=2><input type="submit" value="Submit" style="color: green; font-size: 20pt;" /></td>
-				<td><input type="reset" value="Cancel"	style="color: red; font-size: 20pt" /></td>
+				<td colspan=2><input type="submit" value="Submit"
+					style="color: green; font-size: 20pt;" /></td>
+				<td><input type="reset" value="Cancel"
+					style="color: red; font-size: 20pt" /></td>
 
 			</tr>
 		</table>

@@ -3,7 +3,6 @@ package com.suman.Controller;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +46,20 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String showLogin() {
 		System.out.println("loginnnnnnnn");
-		// ModelAndView mv = new ModelAndView("login");
-
+		
 		return "login";
 	}
+
 	@RequestMapping("/logout")
 	public String showLogout() {
 		System.out.println("logooout");
-		
+
 		return "index";
 	}
-		@RequestMapping("/register")
-	public ModelAndView ShowRegister(@ModelAttribute("us")User user,BindingResult result,HttpServletRequest request) {
+
+	@RequestMapping("/register")
+	public ModelAndView ShowRegister(@ModelAttribute("us") User user, BindingResult result,
+			HttpServletRequest request) {
 		System.out.println("registerrrr");
 		ModelAndView mv = new ModelAndView("register");
 		return mv;
@@ -70,10 +71,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/addus", method = RequestMethod.POST)
-	public String addUser(@ModelAttribute("user") User user, BindingResult result,HttpServletRequest request) {
+	public String addUser(@ModelAttribute("user") User user, BindingResult result, HttpServletRequest request) {
 		System.out.println(user.getConfirmpassword());
 		System.out.println(user.getPassword());
-		//ModelAndView mv = new ModelAndView("register");
+		
 		user.setEnabled("true");
 		user.setRole("ROLE_USER");
 
@@ -85,82 +86,45 @@ public class HomeController {
 
 	}
 
-	/*
-	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	 * \\\
-	 */
+	
+	/*security check for login*/
+	
+	@RequestMapping(value = "/login_session_attributes")
+	/* getting values from textbox */
 
-	/*@RequestMapping("/validate")
-	public ModelAndView checkUser(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv;
-		String s1, s2;
-		s1 = request.getParameter("username");
-		s2 = request.getParameter("password");
-		mv = new ModelAndView("/login");
-		System.out.println(s1 + "" + s2);
-		user = userDAO.get(s1);
-		System.out.println(user.getEmailid());
-		
-		//if role is admin then return admin
-		if (user.getRole().equals("ROLE_ADMIN")) {
-			mv = new ModelAndView("adminhome");
-		} 
-		//if role is user then return index
-		else if (user.getRole().equals("ROLE_USER")) {
-			mv = new ModelAndView("index");
+	public String login_session_attributes(HttpSession session, Model model,
+			@RequestParam(value = "username") String id) {
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		}
-		return mv;
-	}
-*/
-	
-	
-	/*//////////////////////////////////////////////////////////////////////////////////////////
-*/
-	
-
-	@RequestMapping(value="/login_session_attributes")
-	/*getting values from textbox*/
-	
-	public String login_session_attributes(HttpSession session,Model model,@RequestParam(value="username")String id)
-	{
-		String name=SecurityContextHolder.getContext().getAuthentication().getName();
-		
 		System.out.println("inside security check");
-		
+
 		session.setAttribute("name", name);
 		System.out.println(name);
+
 		
-		//user=userDAO.get(name);
 		session.setAttribute("loggedInUser", user.getEmailid());
-    	session.setAttribute("loggedInUserID", user.getPassword());
-    	
+		session.setAttribute("loggedInUserID", user.getPassword());
+
 		session.setAttribute("LoggedIn", "true");
-		
+
 		@SuppressWarnings("unchecked")
-		/*getting values from database*/
-		Collection<GrantedAuthority> authorities =(Collection<GrantedAuthority>)
-		 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		
-		String role="ROLE_USER";
-		for(GrantedAuthority authority : authorities)
-		{
-			/*comparing both the values from txtbox and database*/
-			if(authority.getAuthority().equals(role))
-			{
+		/* getting values from database */
+		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext()
+				.getAuthentication().getAuthorities();
+
+		String role = "ROLE_USER";
+		for (GrantedAuthority authority : authorities) {
+			/* comparing both the values from txtbox and database */
+			if (authority.getAuthority().equals(role)) {
 				System.out.println(role);
+				
 				return "index";
-			}
-			else
-			{
+			} else {
 				session.setAttribute("isAdmin", "true");
 			}
-			}
-		return "adminhome" ;
-		
-		
-	}
-	
+		}
+		return "adminhome";
 
+	}
 
 }

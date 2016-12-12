@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-<script> 
+<script>
 	var app = angular.module('myApp', []);
 
 	function MyController($scope, $http) {
@@ -25,19 +25,22 @@
 	};
 </script>
 <style>
- /*  Add a gray background color and some padding to the footer 
-  */   footer {
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
-    img{
-	width:  200px;
-    height: 100px;
+/*  Add a gray background color and some padding to the footer 
+  */
+footer {
+	background-color: #f2f2f2;
+	padding: 20px;
 }
-.panel-footer{
- background-color: #111;
-    color: white;
-    font-size: 10px;
+
+img {
+	width: 200px;
+	height: 100px;
+}
+
+.panel-footer {
+	background-color: #111;
+	color: white;
+	font-size: 10px;
 }
 </style>
 
@@ -57,7 +60,7 @@
 						placeholder="Search Product Name" ng-model="searchPTitle">
 				</div>
 			</div>
-<!-- table heading -->
+			<!-- table heading -->
 		</form>
 		<table class="table table-hover" style="min-width: 1200px">
 			<thead>
@@ -84,10 +87,11 @@
 							ng-show="sortType == 'quantity' && sortReverse"
 							class="fa fa-caret-up"></span>
 					</a></td>
-					<td><a href="#"	ng-click="sortType = 'prod_price'; sortReverse = !sortReverse">
+					<td><a href="#"
+						ng-click="sortType = 'prod_price'; sortReverse = !sortReverse">
 							Price <span ng-show="sortType == 'prod_price' && !sortReverse"
-							class="fa fa-caret-down"></span> 
-							<span ng-show="sortType == 'prod_price' && sortReverse"
+							class="fa fa-caret-down"></span> <span
+							ng-show="sortType == 'prod_price' && sortReverse"
 							class="fa fa-caret-up"></span>
 					</a></td>
 					<td><a href="#"
@@ -99,7 +103,7 @@
 					</a></td>
 				</tr>
 			</thead>
-<!-- table body showing product list -->
+			<!-- table body showing product list -->
 			<tbody>
 				<tr
 					ng-repeat="p1 in prod | orderBy:sortType:sortReverse | filter:searchPTitle">
@@ -111,45 +115,54 @@
 						style="height: 100px; width: 100px"></td>
 
 
-				 <td><a href="viewdetails?id={{p1.prod_id}}">View</a>
+					<td><a href="viewdetails?id={{p1.prod_id}}">View</a>
 				</tr>
 			</tbody>
 
 		</table>
-		
-		
+
+
 	</div>
-	
-	
-	<div class="container">    
-  <div class="row">
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">NEW YEAR DEAL</div>
-        <div class="panel-body"><img src="resources/images/Accessories.jpg"  class="img-rounded" alt="Image"></div>
-        <div class="panel-footer">Buy accessories and get a gift card</div>
-      </div>
-    </div>
-     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">NEW YEAR DEAL</div>
-        <div class="panel-body"><img src="resources/images/pic14.jpg" class="img-rounded"  alt="Image"></div>
-        <div class="panel-footer">Buy accessories and get a gift card</div>
-      </div>
-    </div>
-   
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">NEW YEAR DEAL</div>
-        <div class="panel-body"><img src="resources/images/pic15.jpg"  class="img-rounded"  alt="Image"></div>
-        <div class="panel-footer">Buy accessories and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br>
-	
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">NEW YEAR DEAL</div>
+					<div class="panel-body">
+						<img src="resources/images/Accessories.jpg" class="img-rounded"
+							alt="Image">
+					</div>
+					<div class="panel-footer">Buy accessories and get a gift card</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">NEW YEAR DEAL</div>
+					<div class="panel-body">
+						<img src="resources/images/pic14.jpg" class="img-rounded"
+							alt="Image">
+					</div>
+					<div class="panel-footer">Buy accessories and get a gift card</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">NEW YEAR DEAL</div>
+					<div class="panel-body">
+						<img src="resources/images/pic15.jpg" class="img-rounded"
+							alt="Image">
+					</div>
+					<div class="panel-footer">Buy accessories and get a gift card</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
 	<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-  
-</footer>
-	
+		<p>Fashion Store Copyright</p>
+
+	</footer>

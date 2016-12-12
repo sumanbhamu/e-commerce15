@@ -1,6 +1,7 @@
 <%@include file="adminhome.jsp"%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
 <head>
@@ -52,6 +53,43 @@
 				</div>
 			</div>
 		</div>
+	</center>
+	<br><br>
+	<center>
+	<h2>Category List</h2>
+<c:if test="${!empty categoryList}">
+			<table>
+				<tr>
+					<th>Category Id</th>
+					<th>Category Name</th>
+
+					<th>Description</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+
+
+				<c:forEach items="${categoryList}" var="category">
+					<tr>
+						<td>${category.cat_id}</td>
+						<td>${category.cat_name}</td>
+
+						<td>${category.description}</td>
+						<td><a
+							href="<c:url value='editcategory${category.cat_id}'/>">Edit</a></td>
+						<td><a
+							href="<c:url value='deletecategory${category.cat_id}'/>">Delete</a></td>
+					</tr>
+				</c:forEach>
+
+
+			</table>
+		</c:if>
+		<center>
+			<a href="adminhome">Back</a>
+		</center>
+
+
 	</center>
 
 

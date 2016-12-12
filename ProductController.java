@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,95 +33,80 @@ import com.suman.ecom.model.Supplier;
 @Controller
 
 public class ProductController {
-	
+
 	@Autowired
 	ProductDAO productDAO;
 
 	@Autowired
 	Product product;
-	
+
 	@Autowired
 	CategoryDAO categoryDAO;
 	@Autowired
 	SupplierDAO supplierDAO;
-	
-	
+
 	@Autowired
 	Category category;
 	@Autowired
 	Supplier supplier;
-	
 
-	
 	@RequestMapping("/viewproducts")
 	public String ShowViewproducts() {
 		return "viewproducts";
 	}
 
-	@RequestMapping(value="/viewdetails")
-    public ModelAndView showViewDetails(@RequestParam("id") String id,Model model)
-	{
-		    //RequestParam is used to get values in string format
-		
-			System.out.println("viewproduct paaaaaage");
-			System.out.println("Id:"+id);
-			
-			//converting string to int
-			int i=Integer.parseInt(id);
-			model.addAttribute("productlist", productDAO.list());
-			
-			
-			/*get product by id*/
-			Product product1=productDAO.get(i);
-			return new ModelAndView("viewdetails","product",product1);
-		
-		
-    }
+	@RequestMapping(value = "/viewdetails")
+	public ModelAndView showViewDetails(@RequestParam("id") String id, Model model) {
+		// RequestParam is used to get values in string format
 
-	
-	
+		System.out.println("viewproduct paaaaaage");
+		System.out.println("Id:" + id);
+
+		// converting string to int
+		int i = Integer.parseInt(id);
+		model.addAttribute("productlist", productDAO.list());
+
+		/* get product by id */
+		Product product1 = productDAO.get(i);
+		return new ModelAndView("viewdetails", "product", product1);
+
+	}
+
 	@RequestMapping("/adminviewproducts")
 	public String showAdminViewproducts() {
 		return "adminviewproducts";
 	}
-	
-	@RequestMapping(value="/deleteproduct&{id}")
-    public ModelAndView showDeleteProd(@PathVariable("id") String id,Model model)throws Exception
-	{
-		   
-			
-			int i=Integer.parseInt(id);
-			
-			product=productDAO.get(i);
 
-			System.out.println("product deleteeeee");
-			
-			ModelAndView mv=new ModelAndView("adminviewproducts");
-			
-			productDAO.delete(product);
-			mv.addObject("adminviewproducts", 0);
-			
-			System.out.println("delete Id:"+id);
-			
-			
-	  	    return mv;
-		
-		
-    }
+	@RequestMapping(value = "/deleteproduct&{id}")
+	public ModelAndView showDeleteProd(@PathVariable("id") String id, Model model) throws Exception {
 
+		int i = Integer.parseInt(id);
 
+		product = productDAO.get(i);
 
-	
+		System.out.println("product deleteeeee");
+
+		ModelAndView mv = new ModelAndView("adminviewproducts");
+
+		productDAO.delete(product);
+		mv.addObject("adminviewproducts", 0);
+
+		System.out.println("delete Id:" + id);
+
+		return mv;
+
+	}
+
 	@RequestMapping("/addproduct")
 	public ModelAndView ShowAddProduct(Model model) {
 		System.out.println("in product");
-		ModelAndView mv=new ModelAndView("addproduct");
-		
-		/*to get list of categories , supplier id's*/
+		ModelAndView mv = new ModelAndView("addproduct");
+
+		/* to get list of categories , supplier id's */
 		model.addAttribute("productList", productDAO.list());
 		model.addAttribute("categoryList", categoryDAO.list());
 		model.addAttribute("supplierList", supplierDAO.list());
-		
+
 		return mv;
 	}
 
@@ -155,34 +139,28 @@ public class ProductController {
 
 			}
 		}
-		
-		//category = categoryDAO.get(prod.getCategory().getCat_name());
-		//categoryDAO.save(category);
 
-		
-		//supplier = supplierDAO.get(prod.getSupplier().getSupplier_name());
-		//supplierDAO.savOrUpdate(supplier);
+		// category = categoryDAO.get(prod.getCategory().getCat_name());
+		// categoryDAO.save(category);
 
-		//prod.setSupplier(supplier);
-		//prod.setCategory(category);
-		
-		
-		/*prod.setCat_id(12);
-		prod.setSupplier_id(37);
-		Supplier sup=new Supplier();
-		product.setSupplier(sup);
-		
-		Category cat=new Category();
-		product.setCategory(cat);
-*/
+		// supplier = supplierDAO.get(prod.getSupplier().getSupplier_name());
+		// supplierDAO.savOrUpdate(supplier);
+
+		// prod.setSupplier(supplier);
+		// prod.setCategory(category);
+
+		/*
+		 * prod.setCat_id(12); prod.setSupplier_id(37); Supplier sup=new
+		 * Supplier(); product.setSupplier(sup);
+		 * 
+		 * Category cat=new Category(); product.setCategory(cat);
+		 */
 		productDAO.savOrUpdate(prod);
-		
-		model.addAttribute("message","product added successfully");
+
+		model.addAttribute("message", "product added successfully");
 		model.addAttribute("productList", productDAO.list());
 		model.addAttribute("categoryList", categoryDAO.list());
 		model.addAttribute("supplierList", supplierDAO.list());
-
-
 
 		return "adminviewproducts";
 	}
@@ -194,7 +172,7 @@ public class ProductController {
 	// @ResponseBody is used whenever angularjs is used
 	// for filtering and sorting -angular js
 	// (google)gson converts java obj into json(java script obj)
-	
+
 	public @ResponseBody String getValues() throws Exception {
 		String result = "";
 		plist = productDAO.list();
@@ -202,8 +180,5 @@ public class ProductController {
 		result = gson.toJson(plist);
 		return result;
 	}
-
-	
-
 
 }
